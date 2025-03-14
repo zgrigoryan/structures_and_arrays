@@ -53,7 +53,7 @@ SoA iteration speed: 0.00133229s
 - **Array of Structs (AoS)** stores all properties of a particle together in memory.
   - This can lead to **cache misses** when iterating over a single property (e.g., summing all spins).
 - **Struct of Arrays (SoA)** stores each property in a contiguous array.
-  - This improves **cache locality** and enables **SIMD optimizations**, making property-wise operations faster.
+  - This improves **cache locality**, making property-wise operations faster.
 
 ### **Why It Matters in Quantum Simulations**
 - Large-scale quantum physics simulations involve millions of particles.
