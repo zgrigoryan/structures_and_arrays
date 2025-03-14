@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <array>
 #include <chrono>
 #include <random>
 #include <algorithm>
@@ -57,21 +56,21 @@ int main(int argc, char* argv[]){
         std::vector<double> spin;
     };
     Particles particles_soa;
-    particles_soa.x.resize(N);
-    particles_soa.y.resize(N);
-    particles_soa.z.resize(N);
-    particles_soa.px.resize(N);
-    particles_soa.py.resize(N);
-    particles_soa.pz.resize(N);
-    particles_soa.spin.resize(N);
+    particles_soa.x.reserve(N);
+    particles_soa.y.reserve(N);
+    particles_soa.z.reserve(N);
+    particles_soa.px.reserve(N);
+    particles_soa.py.reserve(N);
+    particles_soa.pz.reserve(N);
+    particles_soa.spin.reserve(N);
     for (int i = 0; i < N; i++){
-        particles_soa.x[i] = dis(gen);
-        particles_soa.y[i] = dis(gen);
-        particles_soa.z[i] = dis(gen);
-        particles_soa.px[i] = dis(gen);
-        particles_soa.py[i] = dis(gen);
-        particles_soa.pz[i] = dis(gen);
-        particles_soa.spin[i] = dis(gen);
+        particles_soa.x.push_back(dis(gen));
+        particles_soa.y.push_back(dis(gen));
+        particles_soa.z.push_back(dis(gen));
+        particles_soa.px.push_back(dis(gen));
+        particles_soa.py.push_back(dis(gen));
+        particles_soa.pz.push_back(dis(gen));
+        particles_soa.spin.push_back(dis(gen));
     }
 
     // Summing phases
@@ -112,7 +111,7 @@ int main(int argc, char* argv[]){
 
     // Memory usage
     std::cout << "AoS memory usage: " << sizeof(Particle) * N << " bytes" << std::endl;
-    std::cout << "SoA memory usage: " << sizeof(double) * 6 * N << " bytes" << std::endl;
+    std::cout << "SoA memory usage: " << sizeof(double) * 7 * N << " bytes" << std::endl; 
 
     // Iteration speed
     start = std::chrono::high_resolution_clock::now();
@@ -141,17 +140,3 @@ int main(int argc, char* argv[]){
 
     return 0; 
 }
-
-
-    // Cache efficiency
-    // The Struct of Arrays (SoA) layout is more cache-efficient than the Array of Structs (AoS) layout.
-    // In the AoS layout, all properties of a particle are stored together in memory,
-    // which can lead to cache misses when iterating over the particles.
-    // In the SoA layout, each property of all particles is stored together in memory,
-    // which can lead to better cache utilization when iterating over the particles.
-    // This optimization matters in large-scale quantum physics simulations because
-    // the performance of the simulation can be significantly affected by memory access patterns
-    // and cache utilization, especially when dealing with a large number of particles. 
-
-    // In conclusion, the Struct of Arrays (SoA) layout is more cache-efficient than the Array of Structs (AoS) layout,
-    // and this optimization can improve the performance of large-scale quantum physics simulations by reducing memory access times and cache misses.   
