@@ -60,10 +60,5 @@ SoA iteration speed: 0.00133229s
 - Optimized memory access patterns **reduce execution time and memory overhead**.
 - SoA is especially beneficial in **GPU-based computing** due to its efficient memory access.
 
-## Conclusion
-- **SoA is more cache-efficient than AoS**, leading to better performance in large-scale simulations.
-- **For small-scale problems, the performance difference may be negligible.**
-- **For millions of particles, SoA significantly reduces memory access times and cache misses.**
-
 This project demonstrates the importance of **data layout optimization** in scientific computing, particularly in quantum physics and high-performance computing (HPC) applications.
 
